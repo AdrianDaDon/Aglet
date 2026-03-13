@@ -1,0 +1,25 @@
+// Importing all the other SCSS files
+@import "variables";
+@import "base";
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: inherit;
+  padding: $spacing-lg $spacing-xlg;
+}
+
+.site-logo-img {
+  width: 40%;
+  height: auto;
+  object-fit: contain;
+  object-fit: contain;
+}
+
+.main-nav {
+  display: flex;
+  gap: $spacing-md;
+  align-items: end;
+  
+}
