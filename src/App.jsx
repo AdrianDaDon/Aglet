@@ -7,10 +7,11 @@ import { data } from "../public/data";
 
 function App() {
   const stickyRef = useRef(null);
-
   // keep track of hovered card to add overlay on every other card
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredCardID, setHoveredCardID] = useState(null);
+  // 0–1 progress for card strip and HorizontalScrollBar
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   function handleScroll(section) {
     // ends the function if the section is undefined/null
@@ -23,12 +24,13 @@ function App() {
     const stickySection = section.parentElement;
     const offsetTop = stickySection.offsetTop;
 
-    // 450vh in px
     const scrollRange = 3.5 * window.innerHeight;
     // geting the value of how far the user has scrolled
     const scrolled = window.scrollY - offsetTop;
     // calculation of the scroll progress
     const progress = Math.min(1, Math.max(0, scrolled / scrollRange));
+
+    setScrollProgress(progress);
 
     const maxTranslateVw = 350;
     const translateVw = progress * maxTranslateVw;
@@ -69,6 +71,9 @@ function App() {
                 );
               })}
             </div>
+          </div>
+          <div className="scroll-progress">
+            <HorizontalScrollBar scrollProgress={scrollProgress} />
           </div>
         </section>
       </main>

@@ -67,9 +67,11 @@
         font-size: $title-size;
         font-weight: 700;
         margin: $spacing-sm 0;
+        padding: 0 $spacing-sm ;
     }
 
     .card-subtitle {
         color: $text-muted;
+        padding: 0 $spacing-sm ;
     }
 }

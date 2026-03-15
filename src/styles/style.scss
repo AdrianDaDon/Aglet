@@ -45,8 +45,25 @@
 }
 
 // Progress bar (HorizontalScrollBar component)
+
+.scroll-progress {
+
+  position: fixed;
+  bottom: 15%;
+  left: 35%;
+  border: .5px solid rbga(0, 0, 0, 0.7);
+  width: 30%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+
+}
+
+
 .wrapper {
   width: 100%;
+  background-color: rgba(58, 55, 55, 0.6);
 
   .scrollbar-container {
     display: block;
@@ -106,4 +123,6 @@
     padding: 0 $spacing-md;
   }
 }
+
+
 

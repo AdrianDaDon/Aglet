@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-// scrollRef: ref attached to the scrollable container (passed from parent)
-export default function HorizontalScrollBar({ scrollRef }) {
+
+export default function HorizontalScrollBar({ scrollProgress, scrollRef }) {
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
+
+  const progressFromContainer = scrollProgress != null; //
+
   useEffect(() => {
+    if (progressFromContainer) return;
     const container = scrollRef?.current;
     if (!container) return;
 
@@ -14,20 +18,22 @@ export default function HorizontalScrollBar({ scrollRef }) {
       setScrollPercentage(percentage);
     };
 
-    handleScroll(); // set initial value
+    handleScroll();
     container.addEventListener("scroll", handleScroll);
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollRef]);
+  }, [scrollRef, progressFromContainer]);
+
+  const percentage = progressFromContainer ? scrollProgress : scrollPercentage;
 
   return (
     <div className="wrapper">
       <div className="scrollbar-container">
         <div
           className="scroll-fill"
-          style={{ width: `${scrollPercentage * 100}%` }}
+          style={{ width: `${percentage * 100}%` }}
         />
       </div>
     </div>
