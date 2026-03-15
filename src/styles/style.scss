@@ -1,6 +1,8 @@
 // Importing all the other SCSS files
 @import "variables";
 @import "base";
+@import "card";
+
 
 .header-container {
   display: flex;
@@ -39,4 +41,83 @@
   display: flex;
   gap: $spacing-md;
   align-items: end;
+}
+
+// Progress bar (HorizontalScrollBar component)
+.wrapper {
+  width: 100%;
+
+  .scrollbar-container {
+    display: block;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .scroll-fill {
+    height: 100%;
+    background: $text-primary;
+    border-radius: 2px;
+    transition: width 0.3s ease-in-out;
+  }
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: $spacing-md;
+  padding: $spacing-md 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow-x: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:before {
+    content: "";
+  }
+}
+
+// Main sections
+.sticky-section {
+  height: 500vh;
+
+  .sticky {
+    overflow: hidden;
+    position: sticky;
+    top: 100px;
+    height: 100vh;
+  }
+
+  .scroll-section {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 500vw;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    padding: 0 $spacing-md;
+  }
 }
