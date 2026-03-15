@@ -63,4 +63,14 @@
             width: 570px;
         }
     }
+
+    .card-title {
+        font-size: $title-size;
+        font-weight: 700;
+        margin: $spacing-sm 0;
+    }
+
+    .card-subtitle {
+        color: $text-muted;
+    }
 }

@@ -51,8 +51,8 @@ export default function Card({
           className={`card-overlay ${isHovered && hoveredCardID !== id ? "card-overlay--visible" : ""}`}
         />
       </div>
-      <h2 className="card-title">{title}</h2>
-      <h3 className="card-subtitle">{subtitle}</h3>
+      <p className="card-title">{title}</p>
+      <p className="card-subtitle">{subtitle}</p>
     </div>
   );
 }
