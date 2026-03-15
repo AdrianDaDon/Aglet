@@ -49,7 +49,6 @@ function App() {
       <Header />
       <main>
         <div className="container"></div>
-
         <section className="sticky-section">
           <div className="sticky" ref={stickyRef}>
             <div className={`horizontal-scroll-section scroll-section`}>
@@ -73,7 +72,7 @@ function App() {
           </div>
         </section>
       </main>
-
+      <Footer />
     </>
   );
 }

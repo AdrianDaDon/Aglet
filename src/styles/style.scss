@@ -3,7 +3,6 @@
 @import "base";
 @import "card";
 
-
 .header-container {
   display: flex;
   flex-direction: row;
@@ -13,6 +12,8 @@
 }
 
 .footer-container {
+  position: fixed;
+  width:90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -83,8 +84,6 @@
   }
 }
 
-
-
 // Main sections
 .sticky-section {
   height: 450vh;
@@ -92,7 +91,7 @@
   .sticky {
     overflow: hidden;
     position: sticky;
-    top: 100px;
+    top: 0;
     height: 100vh;
   }
 
@@ -107,6 +106,4 @@
     padding: 0 $spacing-md;
   }
 }
-
-
 
