@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Card from "./components/Card";
@@ -8,18 +8,29 @@ import { data } from "../public/data";
 function App() {
   const stickyRef = useRef(null);
 
-  function handleScroll(section) {
+  // keep track of hovered card to add overlay on every other card
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredCardID, setHoveredCardID] = useState(null); 
 
-    if (!section) return; // ends the function if the section is undefined/null
+
+  function handleScroll(section) {
+    
+    // ends the function if the section is undefined/null
+    if (!section) return; 
     const scrollSection = section.querySelector(".scroll-section");
 
-    if (!scrollSection) return; // ends  the function if the scrollSection is undefined/null
+    // ends  the function if the scrollSection is undefined/null
+    if (!scrollSection) return; 
+
     const stickySection = section.parentElement;
     const offsetTop = stickySection.offsetTop;
 
 
-    const scrollRange = 3.5 * window.innerHeight; // 450vh in px
-    const scrolled = window.scrollY - offsetTop; // geting the value of how far the user has scrolled
+    // 450vh in px
+    const scrollRange = 3.5 * window.innerHeight; 
+    // geting the value of how far the user has scrolled
+    const scrolled = window.scrollY - offsetTop;
+    // calculation of the scroll progress
     const progress = Math.min(1, Math.max(0, scrolled / scrollRange));
 
     
@@ -54,6 +65,10 @@ function App() {
                     videoUrl={content.video}
                     title={content.title}
                     subtitle={content.subtitle}
+                    id={index}
+                    isHovered={isHovered}
+                    setHoveredID={setHoveredCardID}
+                    setIsHovered={setIsHovered}
                   />
                 );
               })}
