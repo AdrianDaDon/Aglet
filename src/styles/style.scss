@@ -83,25 +83,11 @@
   }
 }
 
-.card {
-  width: 200px;
-  height: 200px;
-  position: relative;
-  overflow-x: hidden;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.05);
-  }
-  &:before {
-    content: "";
-  }
-}
+
 
 // Main sections
 .sticky-section {
-  height: 500vh;
+  height: 450vh;
 
   .sticky {
     overflow: hidden;
@@ -114,10 +100,11 @@
     position: absolute;
     top: 0;
     height: 100%;
-    width: 500vw;
+    width: 450vw;
     will-change: transform;
     display: flex;
     align-items: center;
     padding: 0 $spacing-md;
   }
 }
+

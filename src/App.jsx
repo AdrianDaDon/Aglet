@@ -9,17 +9,21 @@ function App() {
   const stickyRef = useRef(null);
 
   function handleScroll(section) {
-    if (!section) return;
+
+    if (!section) return; // ends the function if the section is undefined/null
     const scrollSection = section.querySelector(".scroll-section");
-    if (!scrollSection) return;
+
+    if (!scrollSection) return; // ends  the function if the scrollSection is undefined/null
     const stickySection = section.parentElement;
     const offsetTop = stickySection.offsetTop;
-    // Scrollable range: section is 500vh, viewport 100vh → we scroll 400vh while sticky is active
-    const scrollRange = 4 * window.innerHeight; // 400vh in px
-    const scrolled = window.scrollY - offsetTop;
+
+
+    const scrollRange = 3.5 * window.innerHeight; // 450vh in px
+    const scrolled = window.scrollY - offsetTop; // geting the value of how far the user has scrolled
     const progress = Math.min(1, Math.max(0, scrolled / scrollRange));
-    // Content is 500vw; translate by up to 400vw so all cards come into view
-    const maxTranslateVw = 400;
+
+    
+    const maxTranslateVw = 350;
     const translateVw = progress * maxTranslateVw;
     scrollSection.style.transform = `translate3d(${-translateVw}vw, 0, 0)`;
   }
@@ -33,30 +37,25 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-
   return (
     <>
       <Header />
       <main>
-
-          <div className="container">
-          </div>
-        
+        <div className="container"></div>
 
         <section className="sticky-section">
           <div className="sticky" ref={stickyRef}>
             <div className="horizontal-scroll-section scroll-section">
               {data.map((content, index) => {
-
                 return (
-                  <Card 
+                  <Card
                     key={index}
                     thumbnail={content.thumbnail}
                     videoUrl={content.video}
                     title={content.title}
                     subtitle={content.subtitle}
                   />
-                )
+                );
               })}
             </div>
           </div>
