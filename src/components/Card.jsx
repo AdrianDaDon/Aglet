@@ -1,32 +1,43 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react";
 
-export default function Card({thumbnail, videoUrl, title, subtitle, id, setHoveredID, setIsHovered, isHovered}) {
-
-  const videoRef = useRef(null)
-  const [hasBeenHovered, setHasBeenHovered] = useState(false) 
+export default function Card({
+  thumbnail,
+  videoUrl,
+  title,
+  subtitle,
+  id,
+  setHoveredID,
+  setIsHovered,
+  isHovered,
+  hoveredCardID,
+}) {
+  const videoRef = useRef(null);
+  const [hasBeenHovered, setHasBeenHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsHovered(true)
-    setHoveredID(id)
-    setHasBeenHovered(true)
-    videoRef.current?.play()
+    // setting all states once the card is hovered on 
+    setIsHovered(true);
+    setHoveredID(id);
+    setHasBeenHovered(true);
+    videoRef.current?.play();
+  };
 
-    console.log(id);
-  }
-
-  const handleMouseLeave = () => {
-    videoRef.current?.pause()
+  const handleMouseLeave = (e) => {
+    // Only clear hover when actually leaving the card (not moving to a child)
+    const related = e.relatedTarget;
+    if (related && e.currentTarget.contains(related)) return; //
+    videoRef.current?.pause();
     setHoveredID(null);
-    setIsHovered(false)
-  }
+    setIsHovered(false);
+  };
 
   return (
     <div
-      className={`card${hasBeenHovered ? ' card--video-stayed' : ''}`}
+      className={`card${hasBeenHovered ? " card--video-stayed" : ""}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`card-image-container ${isHovered ? 'card-overlay' : ''}`}>
+      <div className="card-image-container">
         <img className="card-image" src={`${thumbnail}`} alt="" />
         <video
           ref={videoRef}
@@ -36,9 +47,12 @@ export default function Card({thumbnail, videoUrl, title, subtitle, id, setHover
           muted
           playsInline
         />
+        <div
+          className={`card-overlay ${isHovered && hoveredCardID !== id ? "card-overlay--visible" : ""}`}
+        />
       </div>
       <h2 className="card-title">{title}</h2>
       <h3 className="card-subtitle">{subtitle}</h3>
     </div>
-  )
+  );
 }
