@@ -12,10 +12,16 @@ function App() {
     if (!section) return;
     const scrollSection = section.querySelector(".scroll-section");
     if (!scrollSection) return;
-    const offsetTop = section.parentElement.offsetTop;
-    let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
-    percentage = Math.min(100, Math.max(0, percentage));
-    scrollSection.style.transform = `translate3d(${-percentage}vw, 0, 0)`;
+    const stickySection = section.parentElement;
+    const offsetTop = stickySection.offsetTop;
+    // Scrollable range: section is 500vh, viewport 100vh → we scroll 400vh while sticky is active
+    const scrollRange = 4 * window.innerHeight; // 400vh in px
+    const scrolled = window.scrollY - offsetTop;
+    const progress = Math.min(1, Math.max(0, scrolled / scrollRange));
+    // Content is 500vw; translate by up to 400vw so all cards come into view
+    const maxTranslateVw = 400;
+    const translateVw = progress * maxTranslateVw;
+    scrollSection.style.transform = `translate3d(${-translateVw}vw, 0, 0)`;
   }
 
   useEffect(() => {
@@ -33,14 +39,9 @@ function App() {
       <Header />
       <main>
 
-        <section>
           <div className="container">
-            <h1>Hybrid Scrolling Section</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas provident incidunt, quod amet placeat dolor accusamus? Excepturi modi optio quo, exercitationem delectus inventore doloribus amet similique molestiae, tempora adipisci facere?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas provident incidunt, quod amet placeat dolor accusamus? Excepturi modi optio quo, exercitationem delectus inventore doloribus amet similique molestiae, tempora adipisci facere?</p>
           </div>
-        </section>
-
+        
 
         <section className="sticky-section">
           <div className="sticky" ref={stickyRef}>
@@ -61,7 +62,6 @@ function App() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }
