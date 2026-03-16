@@ -22,15 +22,16 @@ function App() {
 
   function handleScroll(section) {
     // ends the function if the section is undefined/null
-    // ends the function if the section is undefined/null
     if (!section) return;
     const scrollSection = section.querySelector(".scroll-section");
 
     // ends  the function if the scrollSection is undefined/null
     if (!scrollSection) return;
 
+
+    // if the device is not a desktop, dont transform the card
     if (!isDesktop()) {
-      scrollSection.style.transform = "none";
+      scrollSection.style.transform = "none"; 
       return;
     }
 
@@ -73,11 +74,11 @@ function App() {
     const onScroll = () => handleScroll(section);
 
     // adding an event to listen for scrolling on the window
-    // passive ensure that the browser continues scrolling without having to call preventDefault()
     window.addEventListener("scroll", onScroll, { passive: true });
     const onResize = () => handleScroll(section);
     window.addEventListener("resize", onResize);
 
+    // clicking the arrow icons will change the scroll progress accordingly
     const onRightClick = () => {
       setScrollProgress((prev) => Math.min(1, prev + 0.1));
     };
@@ -88,6 +89,7 @@ function App() {
     leftArrow?.addEventListener("click", onLeftClick);
 
     return () => {
+      // removing the event listeners when the component no more needed
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       rightArrow?.removeEventListener("click", onRightClick);
