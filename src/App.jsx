@@ -11,6 +11,7 @@ function App() {
   // keep track of hovered card to add overlay on every other card
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredCardID, setHoveredCardID] = useState(null);
+
   // 0–1 progress for card strip and HorizontalScrollBar
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -38,7 +39,22 @@ function App() {
     scrollSection.style.transform = `translate3d(${-translateVw}vw, 0, 0)`;
   }
 
+  // Sync scrollProgress to card strip transform
   useEffect(() => {
+    const section = stickyRef.current;
+    if (!section) return;
+    const scrollSection = section.querySelector(".scroll-section");
+    if (!scrollSection) return;
+    const maxTranslateVw = 350;
+    const translateVw = scrollProgress * maxTranslateVw;
+    scrollSection.style.transform = `translate3d(${-translateVw}vw, 0, 0)`;
+  }, [scrollProgress]);
+
+  useEffect(() => {
+
+    const rightArrow = document.querySelector(".right-arrow");
+    const leftArrow = document.querySelector(".left-arrow");
+
     const section = stickyRef.current;
     if (!section) return;
     handleScroll(section);
@@ -47,7 +63,21 @@ function App() {
     // adding an event to listen for scrolling on the window
     // passive ensure that the browser continues scrolling without having to call preventDefault()
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const onRightClick = () => {
+      setScrollProgress((prev) => Math.min(1, prev + 0.1));
+    };
+    const onLeftClick = () => {
+      setScrollProgress((prev) => Math.max(0, prev - 0.1));
+    };
+    rightArrow?.addEventListener("click", onRightClick);
+    leftArrow?.addEventListener("click", onLeftClick);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      rightArrow?.removeEventListener("click", onRightClick);
+      leftArrow?.removeEventListener("click", onLeftClick);
+    };
   }, []);
 
   return (
