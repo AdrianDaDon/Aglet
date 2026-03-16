@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Header from "./app/components/Header";
+import StairsTransition from "./app/components/StairsTransition";
 import Footer from "./app/components/Footer";
 import Card from "./app/components/Card";
 import HorizontalScrollBar from "./app/components/HorizontalScrollBar";
@@ -100,7 +101,7 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
+      <StairsTransition>
         <Route
           path="/"
           element={
@@ -137,7 +138,7 @@ function App() {
           }
         />
         {/* <Route path="/contact" element={<Contact />} /> */}
-      </Routes>
+      </StairsTransition>
       <Footer />
     </>
   );
