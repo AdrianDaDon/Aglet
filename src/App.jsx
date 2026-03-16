@@ -17,13 +17,22 @@ function App() {
   // 0–1 progress for card strip and HorizontalScrollBar
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // check if the device is desktop
+  const isDesktop = () => window.innerWidth >= 1024;
+
   function handleScroll(section) {
+    // ends the function if the section is undefined/null
     // ends the function if the section is undefined/null
     if (!section) return;
     const scrollSection = section.querySelector(".scroll-section");
 
     // ends  the function if the scrollSection is undefined/null
     if (!scrollSection) return;
+
+    if (!isDesktop()) {
+      scrollSection.style.transform = "none";
+      return;
+    }
 
     const stickySection = section.parentElement;
     const offsetTop = stickySection.offsetTop;
@@ -41,8 +50,9 @@ function App() {
     scrollSection.style.transform = `translate3d(${-translateVw}vw, 0, 0)`;
   }
 
-  // Sync scrollProgress to card strip transform
+  // Sync scrollProgress to card strip transform (desktop only)
   useEffect(() => {
+    if (!isDesktop()) return;
     const section = stickyRef.current;
     if (!section) return;
     const scrollSection = section.querySelector(".scroll-section");
@@ -65,6 +75,8 @@ function App() {
     // adding an event to listen for scrolling on the window
     // passive ensure that the browser continues scrolling without having to call preventDefault()
     window.addEventListener("scroll", onScroll, { passive: true });
+    const onResize = () => handleScroll(section);
+    window.addEventListener("resize", onResize);
 
     const onRightClick = () => {
       setScrollProgress((prev) => Math.min(1, prev + 0.1));
@@ -77,6 +89,7 @@ function App() {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       rightArrow?.removeEventListener("click", onRightClick);
       leftArrow?.removeEventListener("click", onLeftClick);
     };
@@ -95,7 +108,7 @@ function App() {
                 <SlArrowLeft className="scroll-arrow left-arrow" />
                 <SlArrowRight className="scroll-arrow right-arrow" />
                 <div className="sticky" ref={stickyRef}>
-                  <div className={`horizontal-scroll-section scroll-section`}>
+                  <div className={`scroll-section`}>
                     {data.map((content, index) => {
                       return (
                         <Card

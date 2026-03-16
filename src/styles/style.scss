@@ -102,26 +102,59 @@
 }
 
 // Main sections
+// Tablet and smaller: normal vertical scroll, no horizontal scroll
 .sticky-section {
-  height: 450vh;
-
   .sticky {
     overflow: hidden;
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    position: relative;
+    min-height: 100vh;
   }
 
   .scroll-section {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 450vw;
-    will-change: transform;
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 0 $spacing-md;
-    transition: transform 0.4s ease-out;
+    width: 100%;
+  }
+}
+
+// Desktop only: horizontal scroll driven by page scroll
+@media (min-width: 1024px) {
+  .sticky-section {
+    height: 450vh;
+
+    .sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .scroll-section {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 450vw;
+      flex-direction: row;
+      will-change: transform;
+      transition: transform 0.4s ease-out;
+    }
+  }
+
+  .scroll-arrow {
+    display: block;
+  }
+
+  .scroll-progress {
+    display: block;
+  }
+}
+
+// Arrow and progress bar to only display on desktop
+@media (max-width: 1023px) {
+  .scroll-arrow,
+  .scroll-progress {
+    display: none;
   }
 }
 
