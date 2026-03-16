@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Card from "./components/Card";
 import HorizontalScrollBar from "./components/HorizontalScrollBar";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { data } from "../public/data";
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
       <main>
         <div className="container"></div>
         <section className="sticky-section">
+        
+          <SlArrowLeft className="scroll-arrow left-arrow" />
+          <SlArrowRight className="scroll-arrow right-arrow" />
           <div className="sticky" ref={stickyRef}>
             <div className={`horizontal-scroll-section scroll-section`}>
               {data.map((content, index) => {

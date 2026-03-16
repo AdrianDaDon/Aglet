@@ -44,7 +44,7 @@
   align-items: end;
 }
 
-// Progress bar (HorizontalScrollBar component)
+// Progress bar 
 
 .scroll-progress {
 
@@ -124,5 +124,21 @@
   }
 }
 
+// scroll arrows
+
+.scroll-arrow {
+  position: fixed;
+  top: 45%;
+  z-index: 100;
+}
+
+.left-arrow {
+  margin-left: 2%
+}
+
+.right-arrow {
+  margin-right: 2%;
+  right: 0;
+}
 
 
