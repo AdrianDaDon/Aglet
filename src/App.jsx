@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./app/components/Header";
 import Footer from "./app/components/Footer";
 import Card from "./app/components/Card";
 import HorizontalScrollBar from "./app/components/HorizontalScrollBar";
+import Contact from "./app/Contact";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { data } from "../public/data";
 
@@ -83,37 +85,44 @@ function App() {
   return (
     <>
       <Header />
-      <main>
-        <div className="container"></div>
-        <section className="sticky-section">
-        
-          <SlArrowLeft className="scroll-arrow left-arrow" />
-          <SlArrowRight className="scroll-arrow right-arrow" />
-          <div className="sticky" ref={stickyRef}>
-            <div className={`horizontal-scroll-section scroll-section`}>
-              {data.map((content, index) => {
-                return (
-                  <Card
-                    key={index}
-                    thumbnail={content.thumbnail}
-                    videoUrl={content.video}
-                    title={content.title}
-                    subtitle={content.subtitle}
-                    id={index}
-                    isHovered={isHovered}
-                    setHoveredID={setHoveredCardID}
-                    setIsHovered={setIsHovered}
-                    hoveredCardID={hoveredCardID}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="scroll-progress">
-            <HorizontalScrollBar scrollProgress={scrollProgress} />
-          </div>
-        </section>
-      </main>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <main>
+              <div className="container"></div>
+              <section className="sticky-section">
+                <SlArrowLeft className="scroll-arrow left-arrow" />
+                <SlArrowRight className="scroll-arrow right-arrow" />
+                <div className="sticky" ref={stickyRef}>
+                  <div className={`horizontal-scroll-section scroll-section`}>
+                    {data.map((content, index) => {
+                      return (
+                        <Card
+                          key={index}
+                          thumbnail={content.thumbnail}
+                          videoUrl={content.video}
+                          title={content.title}
+                          subtitle={content.subtitle}
+                          id={index}
+                          isHovered={isHovered}
+                          setHoveredID={setHoveredCardID}
+                          setIsHovered={setIsHovered}
+                          hoveredCardID={hoveredCardID}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="scroll-progress">
+                  <HorizontalScrollBar scrollProgress={scrollProgress} />
+                </div>
+              </section>
+            </main>
+          }
+        />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
       <Footer />
     </>
   );
