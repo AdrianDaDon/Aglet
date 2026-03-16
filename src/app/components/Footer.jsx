@@ -44,8 +44,8 @@ export default function Footer() {
         </div>
 
         <div className="social-links">
-          <a href="/https://www.instagram.com/too_smooth.ww/">Instagram</a>
-          {" | "}<a href="/https://za.linkedin.com/in/belo-adrien">LinkedIn</a>
+          <a href="https://www.instagram.com/too_smooth.ww/">Instagram</a>
+          {" | "}<a href="https://za.linkedin.com/in/belo-adrien">LinkedIn</a>
         </div>
       </div>
     </footer>

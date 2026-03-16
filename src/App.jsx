@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Card from "./components/Card";
-import HorizontalScrollBar from "./components/HorizontalScrollBar";
+import Header from "./app/components/Header";
+import Footer from "./app/components/Footer";
+import Card from "./app/components/Card";
+import HorizontalScrollBar from "./app/components/HorizontalScrollBar";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { data } from "../public/data";
 
@@ -43,6 +43,9 @@ function App() {
     if (!section) return;
     handleScroll(section);
     const onScroll = () => handleScroll(section);
+
+    // adding an event to listen for scrolling on the window
+    // passive ensure that the browser continues scrolling without having to call preventDefault()
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

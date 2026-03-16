@@ -12,7 +12,7 @@ export default function Header() {
 
             <nav className="main-nav">
                 <a href="./">home</a>
-                <a href="./contact">contact</a>
+                <a href="../Contact">contact</a>
             </nav>
         </div>
     </header>
