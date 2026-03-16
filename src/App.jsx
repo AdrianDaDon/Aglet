@@ -121,7 +121,7 @@ function App() {
             </main>
           }
         />
-        <Route path="/contact" element={<Contact />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
       </Routes>
       <Footer />
     </>

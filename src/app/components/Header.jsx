@@ -1,24 +1,21 @@
-import React from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   return (
     <header>
-      <div className="header-container">
-        <div className="site-logo">
-          <a href="./">
-            <img
-              className="site-logo-img"
-              src="/Logo/aglet_logo.svg"
-              alt="Aglet Logo"
-            />
-          </a>
-        </div>
+        <div className="header-container">
+            <div className="site-logo">
+                <Link to="/">
+                    <img className="site-logo-img" src="/Logo/aglet_logo.svg" alt="Aglet Logo" />
+                </Link>
+            </div>
 
-        <nav className="main-nav">
-          <a href="./">home</a>
-          <a href="../Contact">contact</a>
-        </nav>
-      </div>
+            <nav className="main-nav">
+                <Link to="/">home</Link>
+                <Link to="/contact">contact</Link>
+            </nav>
+        </div>
     </header>
-  );
+  )
 }
